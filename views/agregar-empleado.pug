@@ -1,0 +1,30 @@
+extends ./layout/index
+
+block contenido 
+    .container.mx-auto.px-10.py-10
+        form
+            .grid.gap-6.mb-6(class="md:grid-cols-2")
+                div 
+                    label(for="nombre" class="block my-2 text-sm font-medium text-gray-900 dark:text-white") Nombre
+                    input(type="text" id="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nombre Empleado" required)
+                div
+                    label(for="apellido" class="block my-2 text-sm font-medium text-gray-900 dark:text-white") Apellido
+                    input(type="text" id="apellido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Apellido Empleado" required)
+                div
+                    label(for="sexo" class="block my-2 text-sm font-medium text-gray-900 dark:text-white") Sexo
+                    input(type="text" id="sexo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sexo Empleado" required)
+                div
+                    label(for="puesto" class="block my-2 text-sm font-medium text-gray-900 dark:text-white") Puesto
+                    select(name="puesto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500")
+                        each puesto in puestos 
+                            option(value=puesto.idPuesto) #{puesto.nombre}  
+                div
+                    label(for="fechaNacimiento" class="block my-2 text-sm font-medium text-gray-900 dark:text-white") Fecha de Nacimiento
+                    input(type="date" id="fechaNacimiento" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fecha Nacimiento Empleado" required)
+                div
+                    label(for="fechaAlta" class="block my-2 text-sm font-medium text-gray-900 dark:text-white") Fecha de Alta
+                    input(type="date" id="fechaAlta" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fecha Nacimiento Empleado" required)
+        button.text-white.bg-blue-700.font-medium.rounded-lg.text-sm.w-full.px-5.text-center(type='submit' class='hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:w-auto py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800') Agregar Puesto
+        
+
+        
