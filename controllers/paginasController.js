@@ -19,10 +19,31 @@ const paginaInicio = async (req, res) => {
         console.log(e);
     }
 
+}
+
+const agregarPuesto = async (req, res) => {
+    res.render('agregar-puesto');
+}
+
+const agregarEmpleado = async (req, res) => {
+
+    try {
+        const [puestos] = await db.query("SELECT idPuesto, nombre FROM puestos");
+        console.log(puestos)
+
+        res.render('agregar-empleado', {
+            puestos
+        });
+    } catch (e) {
+        console.log(e)
+    }
 
 }
 
 
+
 export {
-    paginaInicio
+    paginaInicio,
+    agregarPuesto,
+    agregarEmpleado
 }
