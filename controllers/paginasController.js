@@ -29,7 +29,6 @@ const agregarEmpleado = async (req, res) => {
 
     try {
         const [puestos] = await db.query("SELECT idPuesto, nombre FROM puestos");
-        console.log(puestos)
 
         res.render('agregar-empleado', {
             puestos
