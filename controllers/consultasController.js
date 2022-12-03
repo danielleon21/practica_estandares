@@ -11,18 +11,17 @@ const paginaInicio = async (req, res) => {
         const puestos = datos[0][0];
         const empleados = datos[1][0];
 
-        res.render('inicio', {
+        res.render("inicio", {
             puestos,
             empleados
         });
     } catch (e) {
         console.log(e);
     }
-
 }
 
 const agregarPuesto = async (req, res) => {
-    res.render('agregar-puesto', {
+    res.render("agregar-puesto", {
         error: false
     });
 }
@@ -30,7 +29,7 @@ const agregarPuesto = async (req, res) => {
 const guardarPuesto = async (req, res) => {
     const { nombre } = req.body;
     if (nombre === "") {
-        res.render('agregar-puesto', {
+        res.render("agregar-puesto", {
             error: true
         });
         return;
@@ -42,8 +41,9 @@ const guardarPuesto = async (req, res) => {
 const editarPuesto = async (req, res) => {
     const { idPuesto } = req.params;
     const { nombre } = req.body;
+    const method = req.method;
 
-    if (!nombre) {
+    if (method === "GET") {
         try {
             const [puesto] = await db.query(`SELECT nombre FROM puestos WHERE idPuesto = ${idPuesto}`)
             res.render('editar-puesto', {
@@ -109,11 +109,11 @@ const editarEmpleado = async (req, res) => {
 
     const method = req.method;
 
-    if (method == "GET") {
+    if (method === "GET") {
         try {
             const promiseDB = []
 
-            promiseDB.push(db.query('SELECT idPuesto, nombre FROM puestos'));
+            promiseDB.push(db.query("SELECT idPuesto, nombre FROM puestos"));
             promiseDB.push(db.query(`SELECT idEmpleado, nombre, apellido, sexo, fechaNacimiento, fechaAlta, idPuesto FROM empleados WHERE idEmpleado = ${idEmpleado}`))
 
             const data = await Promise.all(promiseDB)
@@ -121,7 +121,7 @@ const editarEmpleado = async (req, res) => {
             const puestos = data[0][0];
             const empleado = data[1][0][0];
 
-            res.render('editar-empleado', {
+            res.render("editar-empleado", {
                 puestos,
                 empleado
             })
