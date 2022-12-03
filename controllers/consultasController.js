@@ -102,6 +102,53 @@ const guardarEmpleado = async (req, res) => {
     }
 }
 
+const editarEmpleado = async (req, res) => {
+
+    const { idEmpleado } = req.params;
+    const { nombre, apellido, sexo, fechaNacimiento, fechaAlta, idPuesto } = req.body;
+
+    const method = req.method;
+
+    if (method == "GET") {
+        try {
+            const promiseDB = []
+
+            promiseDB.push(db.query('SELECT idPuesto, nombre FROM puestos'));
+            promiseDB.push(db.query(`SELECT idEmpleado, nombre, apellido, sexo, fechaNacimiento, fechaAlta, idPuesto FROM empleados WHERE idEmpleado = ${idEmpleado}`))
+
+            const data = await Promise.all(promiseDB)
+
+            const puestos = data[0][0];
+            const empleado = data[1][0][0];
+
+            res.render('editar-empleado', {
+                puestos,
+                empleado
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    } else {
+        try {
+            await db.query(`UPDATE empleados SET nombre="${nombre}", apellido="${apellido}", sexo="${sexo}", fechaNacimiento="${fechaNacimiento}", fechaAlta="${fechaAlta}", idPuesto = ${idPuesto} WHERE idEmpleado=${idEmpleado};`)
+            res.redirect('/')
+        } catch (e) {
+            console.log(e)
+        }
+    }
+}
+
+const eliminarEmpleado = async (req, res) => {
+    const { idEmpleado } = req.params;
+
+    try {
+        await db.query(`DELETE FROM empleados WHERE idEmpleado=${idEmpleado}`)
+        res.redirect('/')
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 
 
 export {
@@ -111,5 +158,7 @@ export {
     guardarPuesto,
     eliminarPuesto,
     editarPuesto,
-    guardarEmpleado
+    guardarEmpleado,
+    editarEmpleado,
+    eliminarEmpleado
 }

@@ -1,5 +1,5 @@
 import express from 'express';
-import { paginaInicio, agregarPuesto, agregarEmpleado, guardarPuesto, eliminarPuesto, editarPuesto, guardarEmpleado } from '../controllers/consultasController.js';
+import { paginaInicio, agregarPuesto, agregarEmpleado, guardarPuesto, eliminarPuesto, editarPuesto, guardarEmpleado, editarEmpleado, eliminarEmpleado } from '../controllers/consultasController.js';
 
 
 const router = express.Router();
@@ -15,6 +15,9 @@ router.post('/editar-puesto/:idPuesto', editarPuesto)
 // endpoints para los empleados
 router.get('/agregar-empleado', agregarEmpleado)
 router.post('/agregar-empleado', guardarEmpleado)
+router.get('/editar-empleado/:idEmpleado', editarEmpleado)
+router.post('/editar-empleado/:idEmpleado', editarEmpleado)
+router.get('/eliminar-empleado/:idEmpleado', eliminarEmpleado)
 
 
 
