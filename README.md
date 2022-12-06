@@ -44,7 +44,7 @@ Instrucciones para correr el codigo.
             PRIMARY KEY (idEmpleado),
             KEY puestoId (puestoId),
             CONSTRAINT idPuesto_FK
-            FOREIGN KEY (idPuesto),
+            FOREIGN KEY (idPuesto)
             REFERENCE puestos(idPuesto)
         );
     "
